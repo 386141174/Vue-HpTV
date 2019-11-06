@@ -55,14 +55,15 @@ export default {
   }
 }
 .teacher-head {
-  width: 1860px;
+  width: 100%;
   height: 300px;
   position: absolute;
   top: 5px;
   left: 3px;
-  background-image: url("../../assets/img/teacher.png");
-  background-size: 1860px 300px;
-}
+//   background-image: url("../../assets/img/teacher.png");
+//   background-size: 1860px 300px;
+min-width: 960px;
+ }
 .el-header,
 .el-footer {
   color: #333;

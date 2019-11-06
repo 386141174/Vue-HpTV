@@ -21,14 +21,13 @@ export default {
   },
   created() {
     this.aaa();
-
   },
   methods: {
     aaa() {
       this.exampleVideo = this.$route.query.sid;
       console.log(this.$route.query.sid);
     },
-   
+    
   }
 };
 </script>

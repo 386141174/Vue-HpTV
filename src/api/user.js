@@ -30,6 +30,14 @@ export function getVideo() {
   })
 }
 
+export function getVideoName(inputVideo) {
+  return request({
+    url: '/video/selectVideo',
+    method: 'post',
+    data:inputVideo
+  })
+}
+
 export function setVideo(formdata) {
   return request({
     url: '/video/uploadFile',
