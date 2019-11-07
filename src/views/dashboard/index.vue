@@ -60,8 +60,9 @@ export default {
   position: absolute;
   top: 5px;
   left: 3px;
-//   background-image: url("../../assets/img/teacher.png");
-//   background-size: 1860px 300px;
+  // background-image: url("../../assets/img/teacher.png");
+  // background-size: 1860px 300px;
+
 min-width: 960px;
  }
 .el-header,
