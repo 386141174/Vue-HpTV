@@ -9,7 +9,7 @@ import LunBo from "./LunBo";
 import MyVideo from "../video/MyVideo";
 export default {
   name: "Video",
-  components: { MyVideo },
+  components: { MyVideo ,LunBo},
   data() {
     // return {
     //    exampleVideo: "http://localhost:8080/video/9a6b12e1cd9846679418043f4934a679.mp4"
@@ -17,7 +17,7 @@ export default {
     return {
       exampleVideo: '',
     }
-    
+
   },
   created() {
     this.aaa();
@@ -25,9 +25,9 @@ export default {
   methods: {
     aaa() {
       this.exampleVideo = this.$route.query.sid;
-      console.log(this.$route.query.sid);
+      console.log(this.exampleVideo);
     },
-    
+
   }
 };
 </script>

@@ -11,6 +11,13 @@
       >
       </el-input>
     </el-form-item>
+    <el-form-item label="课程编号" style="width: 300px">
+      <el-input
+        placeholder="请输入内容"
+        v-model="classNumber"
+        :disabled="true">
+      </el-input>
+    </el-form-item>
     <el-form-item label="房间号码" style="width: 300px">
         <el-input
           placeholder="请输入内容"
@@ -41,22 +48,11 @@
         :on-change="change"
         :on-preview="handlePictureCardPreview"
         :on-remove="handleRemove">
-
         <i class="el-icon-plus"></i>
-
       </el-upload>
-
-
-
       <el-dialog :visible.sync="dialogVisible" >
         <img width="100%" :src="form.image" alt="">
-
       </el-dialog>
-
-
-
-
-
     </el-form-item>
     <el-form-item>
       <el-button type="primary" @click="onSubmit">{{button}}</el-button>
@@ -78,16 +74,16 @@ import {creatRoom,selectRoom,updateRoom} from '@/api/table'
                     image: '',
                     crossfire: '',
                 },
+                classNumber:'',
                 roomNumber:'',
                 dialogVisible: false,
-                ifImage:true,
+                ifImage:false,
                 showImage:'',
                 button:''
-
             }
         },
         created() {
-            this.form.username = sessionStorage.getItem("username")
+          this.form.username = sessionStorage.getItem("username")
           this.getMessage();
         },
         methods: {
@@ -128,16 +124,18 @@ import {creatRoom,selectRoom,updateRoom} from '@/api/table'
                 this.dialogVisible = true;
             },
             change(file){
-                // console.log(file)
                 this.ifImage = false
                 this.form.image = file.raw;
             },
             getMessage(){
-                // let params = new FormData();
-                // params.append("username",this.username);
                 selectRoom(this.form.username).then( request => {
+                  console.log(request)
+                    if (request.data !== null) {
+                      this.ifImage = true
+                    }
                     this.button = '修改房间'
                     this.showImage= request.data.image;
+                    this.classNumber = request.data.liveType;
                     this.form.title = request.data.title;
                     this.form.name = request.data.name;
                     this.form.crossfire = request.data.crossfire;

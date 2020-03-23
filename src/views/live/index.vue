@@ -4,6 +4,7 @@
     <div class="player" >
       <video-player   class="vjs-custom-skin"   :options="playerOptions"  >
       </video-player>
+
     </div>
     <div class="stage">
       <vue-baberrage
@@ -86,6 +87,7 @@
         // },
         data() {
             return {
+              exampleVideo: 'rtmp://47.96.237.94:1935/live/mylive',
                 timer:1,
                 list: null,
                 listLoading: true,
@@ -93,7 +95,7 @@
                 height: '800',
                 sources: [{
                   type: 'rtmp/flv',
-                  src: 'rtmp://47.96.237.94:1935/live/mylive'
+                  src: ''
                 }],
                 techOrder: ['flash'],
                 muted: false, // 默认静音
@@ -128,14 +130,15 @@
         destroyed() {
             this.websocketClose();
         },
+
         methods: {
-            fetchData() {
+          fetchData() {
               let roomNumber = this.$route.query.roomNumber
 
                 rtmp(roomNumber).then( (re) =>{
-                  this.name = re.data.username;
-                  // this.playerOptions.sources[0].src = this.address + '/' +re.data.crossfire;
-                  console.log(this.playerOptions.sources)
+                  this.name = sessionStorage.getItem("username")
+                  this.playerOptions.sources[0].src = this.address + '/' +re.data.crossfire;
+                  // console.log(this.playerOptions.sources)
                   this.initWebSocket()
                 }).catch( (re) =>{
                     console.log(re)

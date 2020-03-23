@@ -29,3 +29,11 @@ export function createOrder(formdata) {
     data:formdata
   })
 }
+
+export function selectOrder(params) {
+  return request({
+    url:'/order/selectOrder',
+    method:'get',
+    params
+  })
+}

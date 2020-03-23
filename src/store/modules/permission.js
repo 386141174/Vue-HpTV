@@ -24,7 +24,7 @@ const permission = {
       return new Promise(resolve => {
         const { roles } = data;
         const accessedRouters = constantRoutes.filter(v => {
-          if (roles.indexOf('admin') >= 0) return true;
+          // if (roles.indexOf('admin') >= 0) return true;
           if (hasPermission(roles, v)) {
             if (v.children && v.children.length > 0) {
               v.children = v.children.filter(child => {

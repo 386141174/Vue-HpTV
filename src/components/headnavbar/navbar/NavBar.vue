@@ -8,7 +8,7 @@
           </li>
         </router-link>
     </div>
-  </div>
+
 </template>
 
 <script>
@@ -28,7 +28,7 @@ export default {
 }
 
 .send {
- 
+
   float: right;
   width: 68px;
   height: 59px;

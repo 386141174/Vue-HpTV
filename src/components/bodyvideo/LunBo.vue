@@ -75,26 +75,26 @@ export default {
       // }
     ],
     jsonArr: [
-      {
-        textTitle: "【漫画屋信任】",
-        textAuthor: "up主:、天堂",
-        textNum: "播放：7.9万"
-      },
-      {
-        textTitle: "【漫画屋信任】",
-        textAuthor: "up主:、天堂",
-        textNum: "播放：9.9万"
-      },
-      {
-        textTitle: "【漫画屋信任】",
-        textAuthor: "up主:、天堂",
-        textNum: "播放：8.9万"
-      },
-      {
-        textTitle: "【漫画屋信任】",
-        textAuthor: "up主:、天堂",
-        textNum: "播放：6.9万"
-      },  
+      // {
+      //   textTitle: "【漫画屋信任】",
+      //   textAuthor: "up主:、天堂",
+      //   textNum: "播放：7.9万"
+      // },
+      // {
+      //   textTitle: "【漫画屋信任】",
+      //   textAuthor: "up主:、天堂",
+      //   textNum: "播放：9.9万"
+      // },
+      // {
+      //   textTitle: "【漫画屋信任】",
+      //   textAuthor: "up主:、天堂",
+      //   textNum: "播放：8.9万"
+      // },
+      // {
+      //   textTitle: "【漫画屋信任】",
+      //   textAuthor: "up主:、天堂",
+      //   textNum: "播放：6.9万"
+      // },
     ]
   }),
   methods: {
@@ -190,7 +190,7 @@ export default {
   flex: 1;
   position: relative;
   /* overflow: hidden; */
-  /* border-radius: 8px; 
+  /* border-radius: 8px;
   background: red;  */
   border-radius: 10px;
   overflow: hidden;

@@ -53,3 +53,11 @@ export function rtmp(roomNumber) {
     params: {roomNumber}
   })
 }
+
+export function singIn(formdata) {
+  return request({
+    url:'/user/signIn',
+    method:'post',
+    data:formdata
+  })
+}

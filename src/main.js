@@ -20,10 +20,10 @@ import 'element-ui/lib/theme-chalk/index.css'//element-ui的css
 
 
 import VueVideoPlayer from 'vue-video-player'
-
 import 'video.js/dist/video-js.css' // 引入样式
 
 import 'vue-video-player/src/custom-theme.css' // 引入样式
+
 
 import 'videojs-flash'
 import { vueBaberrage } from 'vue-baberrage'
@@ -70,6 +70,7 @@ if (process.env.NODE_ENV === 'production') {
 // set ElementUI lang to EN
 // Vue.use(ElementUI, { locale })
 Vue.use(ElementUI) //使用elementUI
+
 Vue.use(VueVideoPlayer)
 Vue.use(vueBaberrage)
 Vue.config.productionTip = false

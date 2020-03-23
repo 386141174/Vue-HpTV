@@ -2,29 +2,18 @@
   <div class="tabulation">
 
   <el-row >
-  <el-col :span="6"  v-for="count in room ">
-    <div class="grid-content bg-purple"  @click="move(count)">
-<!--      <router-link :to="{-->
-<!--        path: 'src+\'live/\'+count.roomNumber',-->
-<!--        // params: {-->
-<!--        //     key: 'value', // orderNum : this.searchData.orderNo-->
-<!--        // },-->
-<!--        query: {-->
-<!--           key: 'value',  orderNum : '1'-->
-<!--        }-->
-<!--    }-->
-<!--">-->
+  <el-col :span="6"  v-for="(rooms,index) in room " :key="index">
+    <div class="grid-content bg-purple"  @click="move(rooms)">
       <el-card :body-style="{ padding: '0px' }" id="card">
-        <img :src="count.image" class="image">
+        <img :src="rooms.image" class="image">
         <div class="card" style="padding: 10px;">
-          <span class="title">asdasd</span>
+          <span class="title">{{rooms.title}}</span>
           <div class="bottom clearfix">
-            <time class="time"><svg-icon  icon-class="user"/>asda</time>
+            <time class="time"><svg-icon  icon-class="user"/>{{rooms.name}}</time>
             <span class="heat"><svg-icon  icon-class="fire"/>70万</span>
           </div>
         </div>
       </el-card>
-<!--      </router-link>-->
    </div>
 
   </el-col>
@@ -38,6 +27,7 @@
 
 <script>
 import { getList ,selectListRoom} from '@/api/table'
+import {queryBuyLive} from "../../api/live";
 
 export default {
 
@@ -90,10 +80,36 @@ export default {
           })
       },
       move(count){
-          this.$router.push({
-            path:this.src+'live/'+count.roomNumber,
-            query: { roomNumber: count.roomNumber }
-          })
+        console.log(count);
+        let requestParam = {
+            "liveType" : count.liveType,
+            "userName" : sessionStorage.getItem("username")
+        }
+
+        if (count.username === sessionStorage.getItem("username")) {
+            this.$router.push({
+                path:this.src+'live/'+count.roomNumber,
+                query: { roomNumber: count.roomNumber }
+            })
+        }else {
+            queryBuyLive(requestParam).then( (respond) => {
+                console.log(respond)
+                if (respond.state === 1) {
+                    this.$router.push({
+                        path:this.src+'live/'+count.roomNumber,
+                        query: { roomNumber: count.roomNumber }
+                    })
+                }else {
+                    this.$message({
+                        message: '您未购买该课程！',
+                        type: 'warning'
+                    });
+                }
+            })
+        }
+
+
+
       }
 
 

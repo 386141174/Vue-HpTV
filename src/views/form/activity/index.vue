@@ -4,6 +4,16 @@
   <el-form-item label="课程名称">
     <el-input v-model="formLabelAlign.courseName"></el-input>
   </el-form-item>
+   <el-form-item label="直播标题" >
+     <el-select v-model="courseBack" placeholder="请选择">
+       <el-option
+         v-for="item in liveType"
+         :key="item.title"
+         :label="item.title"
+         :value="item.liveType">
+       </el-option>
+     </el-select>
+   </el-form-item>
    <el-form-item label="用户名">
      <el-input
        placeholder="请输入内容"
@@ -19,10 +29,14 @@
       :on-change="onchange">
       <i class="el-icon-plus"></i>
     </el-upload>
+
     <el-dialog :visible.sync="dialogVisible">
       <img width="100%" :src="dialogImageUrl" alt="">
     </el-dialog>
   </el-form-item>
+   <el-form-item label="金  额">
+     <el-input v-model="formLabelAlign.amount" style="width: 100px"></el-input>
+   </el-form-item>
   <el-form-item label="课程名额">
     <el-input-number v-model="formLabelAlign.quantity" controls-position="right" :min="1" ></el-input-number>
   </el-form-item>
@@ -46,6 +60,7 @@
 <script>
 
   import {createGoods,showGoods} from "../../../api/goods";
+  import {getliveType} from "../../../api/live";
 
   export default {
         data() {
@@ -56,17 +71,21 @@
                     endtime: '',
                     quantity: 1,
                     image:'',
-                    username:''
+                    username:'',
+                    amount:''
                 },
                 dialogImageUrl: '',
                 dialogVisible: false,
-                ifcreate:false
+                ifcreate:false,
+                courseBack:[],
+                liveType:[]
             }
 
         },
       created(){
             this.formLabelAlign.username = sessionStorage.getItem("username");
             this.show()
+            this.selectLiveType()
       },
         methods: {
             onSubmit(){
@@ -76,6 +95,8 @@
                 params.append("quantity",this.formLabelAlign.quantity);
                 params.append("image",this.formLabelAlign.image);
                 params.append("username",this.formLabelAlign.username);
+                params.append("amount",this.formLabelAlign.amount);
+                params.append("liveType",this.courseBack);
                 createGoods(params).then( re => {
                      if (re.state === 1){
                          this.ifcreate = true;
@@ -111,6 +132,13 @@
                         message: '查询失败',
                         type: 'error'
                     });
+                })
+            },
+            selectLiveType() {
+                let username = sessionStorage.getItem("username");
+                getliveType(username).then( (respond) => {
+                    console.log(respond)
+                    this.liveType = respond.data;
                 })
             }
         }

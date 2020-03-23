@@ -1,30 +1,26 @@
 <template>
   <div class="navbar">
     <hamburger :is-active="sidebar.opened" class="hamburger-container" @toggleClick="toggleSideBar" />
-
-    <breadcrumb class="breadcrumb-container" />
-
+<!--    <breadcrumb class="breadcrumb-container" />-->
+    <addquery class="breadcrumb-container" />
+    <upfile class="breadcrumb-container" />
     <div class="right-menu">
+
       <el-dropdown class="avatar-container" trigger="click">
         <div class="avatar-wrapper">
           <img src="../../../static/avatar.jpg" class="user-avatar">
           <i class="el-icon-caret-bottom" />
         </div>
+
         <el-dropdown-menu slot="dropdown" class="user-dropdown">
           <router-link to="/example/room">
-            <el-dropdown-item v-permission="['admin']">
-              直播设置
-            </el-dropdown-item>
+<!--            <el-dropdown-item v-permission="['teacher']">-->
+<!--              直播设置-->
+<!--            </el-dropdown-item>-->
           </router-link>
           <router-link to="/form/activity">
-            <el-dropdown-item v-permission="['admin']">活动设置</el-dropdown-item>
+            <el-dropdown-item v-permission="['teacher']">活动设置</el-dropdown-item>
           </router-link>
-          <!--          <a target="_blank" href="http://localhost:9528/form/index">-->
-          <!--            -->
-          <!--          </a>-->
-          <!--          <a target="_blank" href="https://panjiachen.github.io/vue-element-admin-site/#/">-->
-          <!--            <el-dropdown-item>Docs</el-dropdown-item>-->
-          <!--          </a>-->
           <el-dropdown-item divided>
             <span style="display:block;" @click="logout">注 销</span>
           </el-dropdown-item>
@@ -39,12 +35,15 @@
   import Breadcrumb from '@/components/Breadcrumb'
   import Hamburger from '@/components/Hamburger'
   import permission from '@/directive/permission/index.js'
-
+  import addquery from '@/components/addquery'
+  import Upfile from '../../components/upfile/index'
   export default {
     directives: { permission },
     components: {
+      Upfile,
       Breadcrumb,
-      Hamburger
+      Hamburger,
+      addquery
     },
     computed: {
       ...mapGetters([
@@ -58,7 +57,8 @@
       },
       async logout() {
         await this.$store.dispatch('user/logout')
-        this.$router.push(`/login?redirect=${this.$route.fullPath}`)
+        this.$router.push(`/login?redirect=${this.$route.fullPath}`);
+        location.reload();
       }
     }
   }
